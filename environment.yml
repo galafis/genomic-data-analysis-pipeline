@@ -1,0 +1,132 @@
+name: genomic-pipeline
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+  - r
+dependencies:
+  # Core Python packages
+  - python=3.9
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - plotly
+  - jupyter
+  - jupyterlab
+  
+  # Bioinformatics Python packages
+  - biopython
+  - pysam
+  - pyvcf
+  - cyvcf2
+  - scanpy
+  - scrublet
+  - anndata
+  
+  # R and packages
+  - r-base=4.2
+  - r-devtools
+  - r-tidyverse
+  - r-data.table
+  - r-ggplot2
+  - r-pheatmap
+  - r-rcolorbrewer
+  - r-shiny
+  - r-dt
+  - r-plotly
+  
+  # Bioconductor packages
+  - bioconductor-deseq2
+  - bioconductor-edger
+  - bioconductor-limma
+  - bioconductor-genomicranges
+  - bioconductor-genomicfeatures
+  - bioconductor-rtracklayer
+  - bioconductor-variantannotation
+  - bioconductor-ensembldb
+  - bioconductor-biomart
+  - bioconductor-clusterprofiler
+  
+  # Workflow management
+  - nextflow
+  - snakemake
+  - cwltool
+  
+  # Quality control tools
+  - fastqc
+  - multiqc
+  - trimmomatic
+  - fastp
+  
+  # Alignment tools
+  - bwa
+  - bowtie2
+  - star
+  - salmon
+  - kallisto
+  - hisat2
+  
+  # Variant calling tools
+  - gatk4
+  - freebayes
+  - bcftools
+  - vcftools
+  - bedtools
+  
+  # File format tools
+  - samtools
+  - htslib
+  - picard
+  
+  # Annotation tools
+  - vep
+  - snpeff
+  
+  # ChIP-seq tools
+  - macs2
+  - homer
+  
+  # Single-cell tools
+  - cellranger
+  - velocyto
+  
+  # Containerization
+  - docker
+  - singularity
+  
+  # Machine learning
+  - tensorflow
+  - pytorch
+  - scikit-learn
+  
+  # Data visualization
+  - igv
+  - circos
+  
+  # Utilities
+  - parallel
+  - wget
+  - curl
+  - git
+  - make
+  - cmake
+  - gcc
+  
+  # Additional Python packages via pip
+  - pip:
+    - torch
+    - torchvision
+    - umap-learn
+    - leiden
+    - harmonypy
+    - scanorama
+    - bbknn
+    - louvain
+    - fa2
+    - session-info
+    - ipywidgets
+    - ipykernel
