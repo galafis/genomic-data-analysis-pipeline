@@ -1,189 +1,159 @@
-# 🧬 Módulos de Pré-processamento e Controle de Qualidade
+# 🧬 Pré-processamento de Dados (QC, Trimming, Normalização, Controle de Lote)
 
 ## 📋 Visão Geral
+Este módulo prepara dados de NGS para as etapas posteriores do pipeline. Abrange controle de qualidade (QC), remoção de adaptadores/trimagem, normalização inicial e verificações/mitigações de efeito de lote (batch), gerando saídas consistentes e reprodutíveis para alinhamento, chamada de variantes e análises downstream.
 
-Este diretório contém módulos especializados para pré-processamento de dados de sequenciamento de próxima geração (NGS) e controle de qualidade abrangente. Os módulos implementam as etapas iniciais críticas do pipeline de análise genômica, garantindo que os dados brutos sejam adequadamente processados antes das análises subsequentes.
+## 🎯 Funções do Módulo
+- Controle de Qualidade (QC): FastQC/MultiQC, métricas customizadas, relatórios integrados.
+- Trimagem/Adaptadores: Remoção de adaptadores/primers, trimagem por qualidade e tamanho mínimo.
+- Filtragem Inicial: Remoção de reads de baixa qualidade, contaminantes, duplicatas técnicas.
+- Normalização Inicial: Padronização de formatos, renomeação de amostras, layout de diretórios, checagens de consistência.
+- Controle de Lote (Batch): Detecção de vieses por run/plataforma/lote e estratégias de mitigação inicial.
 
-## 🎯 Objetivo
-
-O objetivo principal desta pasta é fornecer ferramentas robustas e modulares para:
-
-- **Controle de Qualidade**: Avaliação da qualidade dos dados brutos de sequenciamento
-- **Filtragem de Qualidade**: Remoção de reads de baixa qualidade
-- **Trimagem de Adaptadores**: Remoção de sequências de adaptadores e primers
-- **Normalização**: Padronização de formatos de dados
-- **Relatórios de QC**: Geração de relatórios detalhados de qualidade
-
-## 📁 Estrutura de Conteúdo
-
-### Módulos Principais
-
+## 📁 Estrutura de Diretórios
 ```
 src/preprocessing/
 ├── quality_control/
-│   ├── fastqc_wrapper.py      # Wrapper para FastQC
-│   ├── multiqc_reporter.py    # Agregação de relatórios QC
-│   └── quality_metrics.py     # Métricas customizadas de qualidade
+│   ├── fastqc_wrapper.py
+│   ├── multiqc_reporter.py
+│   └── quality_metrics.py
 ├── trimming/
-│   ├── adapter_trimming.py    # Trimagem de adaptadores
-│   ├── quality_trimming.py    # Trimagem baseada em qualidade
-│   └── primer_removal.py      # Remoção de primers
+│   ├── adapter_trimming.py
+│   ├── quality_trimming.py
+│   └── primer_removal.py
 ├── filtering/
-│   ├── read_filtering.py      # Filtragem de reads
-│   ├── duplicate_removal.py   # Remoção de duplicatas
-│   └── contamination_check.py # Verificação de contaminação
+│   ├── read_filtering.py
+│   ├── duplicate_removal.py
+│   └── contamination_check.py
 └── normalization/
-    ├── format_converter.py    # Conversão entre formatos
-    ├── read_normalizer.py     # Normalização de reads
-    └── batch_processor.py     # Processamento em lote
+    ├── format_converter.py
+    ├── read_normalizer.py
+    └── batch_processor.py
 ```
 
-### Ferramentas Integradas
+## 🔧 Ferramentas Recomendadas e Pipelines
+- FastQC: QC por amostra (relatórios HTML/ZIP).
+- MultiQC: Agregação de relatórios QC em nível de projeto.
+- fastp: Trimagem rápida (qualidade/adaptadores), relatórios JSON/HTML.
+- Trimmomatic: Trimagem flexível com parâmetros finos.
+- cutadapt: Remoção de adaptadores/primers personalizados.
+- bbduk (BBTools): Filtragem/trimagem avançadas e remoção de contaminantes.
 
-- **FastQC**: Controle de qualidade de sequências
-- **MultiQC**: Agregação de relatórios
-- **Trimmomatic**: Trimagem de adaptadores e qualidade
-- **fastp**: Pré-processamento rápido de FASTQ
-- **cutadapt**: Remoção de adaptadores
-- **bbduk**: Filtragem e trimagem avançada
+### Exemplos de Execução (scripts)
+- QC básico (FastQC + MultiQC):
+```
+# QC por amostra
+fastqc -t 8 -o qc/ fastq/*.fastq.gz
 
-## 🔧 Funcionalidades
-
-### Controle de Qualidade
-- Análise de qualidade base por posição
-- Distribuição de qualidade por sequência
-- Detecção de sequências sobrerrepresentadas
-- Análise de conteúdo GC
-- Detecção de duplicatas
-- Verificação de adaptadores
-
-### Pré-processamento
-- Trimagem adaptativa de qualidade
-- Remoção de adaptadores automática
-- Filtragem de reads curtas
-- Correção de erros de sequenciamento
-- Normalização de profundidade de cobertura
-
-### Relatórios
-- Dashboards interativos de QC
-- Métricas estatísticas detalhadas
-- Gráficos de distribuição de qualidade
-- Comparações antes/depois do processamento
-- Alertas automáticos para problemas de qualidade
-
-## 📊 Tipos de Dados Suportados
-
-- **DNA-seq**: Sequenciamento de DNA genômico
-- **RNA-seq**: Sequenciamento de RNA (bulk e single-cell)
-- **ChIP-seq**: Sequenciamento de imunoprecipitação
-- **ATAC-seq**: Sequenciamento de acessibilidade da cromatina
-- **Bisulfite-seq**: Sequenciamento de metilação
-- **Amplicon-seq**: Sequenciamento direcionado
-
-## 🛠️ Tecnologias Utilizadas
-
-### Linguagens de Programação
-- **Python**: Processamento de dados e automação
-- **R**: Análise estatística e visualização
-- **Bash**: Scripts de automação
-
-### Bibliotecas e Frameworks
-- **BioPython**: Manipulação de sequências biológicas
-- **pysam**: Processamento de arquivos SAM/BAM
-- **pandas**: Manipulação de dados
-- **matplotlib/seaborn**: Visualização
-- **Nextflow/Snakemake**: Integração de workflows
-
-## 🚀 Como Usar
-
-### Execução Básica
-```bash
-# Controle de qualidade básico
-python quality_control/fastqc_wrapper.py --input raw_data/ --output qc_results/
-
-# Trimagem de adaptadores
-python trimming/adapter_trimming.py --input raw_reads.fastq --output trimmed_reads.fastq
-
-# Filtragem de qualidade
-python filtering/read_filtering.py --input trimmed_reads.fastq --min-quality 20
+# Agregar
+multiqc -o qc/multiqc/ qc/
+```
+- Trimagem com fastp (pareado):
+```
+fastp \
+  -i sample_R1.fastq.gz -I sample_R2.fastq.gz \
+  -o trimmed/sample_R1.trim.fastq.gz -O trimmed/sample_R2.trim.fastq.gz \
+  --detect_adapter_for_pe --cut_front --cut_tail --cut_mean_quality 20 \
+  --length_required 50 --thread 8 \
+  --json qc/fastp/sample.json --html qc/fastp/sample.html
+```
+- Trimmomatic (pareado) com remoção de adaptadores:
+```
+trimmomatic PE -threads 8 \
+  sample_R1.fastq.gz sample_R2.fastq.gz \
+  trimmed/R1_paired.fq.gz trimmed/R1_unpaired.fq.gz \
+  trimmed/R2_paired.fq.gz trimmed/R2_unpaired.fq.gz \
+  ILLUMINACLIP:adapters.fa:2:30:10 SLIDINGWINDOW:4:20 MINLEN:50
+```
+- Cutadapt para primers específicos (amplicon):
+```
+cutadapt -g ^PRIMER_FWD -G ^PRIMER_REV \
+  -o trimmed/R1.fastq.gz -p trimmed/R2.fastq.gz \
+  sample_R1.fastq.gz sample_R2.fastq.gz
+```
+- Agregação final de QC:
+```
+multiqc -o qc/multiqc_final/ qc/ trimmed/
 ```
 
-### Integração com Workflows
-```bash
-# Via Nextflow
-nextflow run preprocess.nf --reads "data/*.fastq.gz" --outdir results/
+## ⚙️ Orientações de Uso e Configuração
+- Instalação via conda (recomendado):
+```
+conda install -c bioconda fastqc multiqc fastp trimmomatic cutadapt bbmap
+```
+- Parâmetros sugeridos:
+  - Qualidade mínima (Phred): 20–30
+  - Tamanho mínimo de read: 50–75 bp (ajuste conforme aplicação)
+  - Remoção de adaptadores: habilitar detecção automática ou fornecer FASTA de adaptadores
+  - Threads: utilize de acordo com o ambiente (ex.: 8–32)
+- Layout de entradas/saídas:
+  - Input: data/raw/<sample>_R{1,2}.fastq.gz
+  - Output: data/processed/trimmed/, qc/, qc/multiqc/
+- Validação pós-processamento:
+  - Conferir taxas de sobrevivência de reads (>70% recomendável)
+  - Verificar redução/eliminação de adaptadores
+  - Checar distribuição de qualidade/GC após trimagem
 
-# Via Snakemake
-snakemake --configfile config/preprocess_config.yaml
+## 🔗 Integração com Alinhamento e Workflows
+- Alinhamento (src/alignment/): utilizar arquivos trimados pareados como entrada do alinhador (ex.: BWA-MEM2, STAR).
+  - Ex.: `bwa-mem2 index ref.fa` e `bwa-mem2 mem -t 16 ref.fa R1_paired.fq.gz R2_paired.fq.gz | samtools sort -o sample.bam`
+- Workflows: integração por Nextflow/Snakemake.
+```
+# Nextflow
+nextflow run workflows/preprocess.nf \
+  --reads "data/raw/*_{R1,R2}.fastq.gz" --outdir data/processed/
+
+# Snakemake
+snakemake -j 16 --configfile config/preprocess_config.yaml
+```
+- Passagem de metadados: garantir preservação de sample IDs/lanes para merge posterior.
+
+## 🧪 Controle de Lote (Batch)
+- Detecção inicial: comparar métricas de QC por run/máquina/kit (MultiQC sections por grupo).
+- Mitigação no pré-processamento:
+  - Homogeneizar parâmetros de trimagem entre lotes.
+  - Remover contaminantes específicos do lote (bbduk/k-mer filtering).
+- Registros: manter tabela de metadados (sample, run_date, instrument, kit, operador) em `metadata/samples.tsv`.
+- Observação: correções estatísticas avançadas (ex.: ComBat) ocorrem em módulos downstream (expressão/contagem), mas a consistência inicial é crítica aqui.
+
+## ✅ Boas Práticas
+- Fixar versões de ferramentas (environment.yml/lockfiles).
+- Registrar command-lines e logs por amostra (reprodutibilidade).
+- Usar controles (spike-ins, phiX) e checar taxa de contaminação.
+- Evitar over-trimming: balancear qualidade x cobertura.
+- Reexecutar MultiQC após cada etapa crítica.
+- Automatizar com testes em dados de exemplo (tests/test_preprocessing.py).
+
+## 📈 Métricas-Chave de QC
+- Q30 (≥80%), GC esperado por espécie, taxa de duplicação (<20%), conteúdo de adaptador (<5%), N content (<1%).
+- fastp report JSON/HTML e FastQC: avaliar antes/depois do trimming.
+
+## 🔌 Configuração (exemplo de YAML)
+```yaml
+preprocessing:
+  threads: 16
+  min_len: 50
+  min_qual: 20
+  adapter_fasta: adapters.fa
+  tools:
+    trim: fastp
+    qc: [fastqc, multiqc]
+  outputs:
+    trimmed_dir: data/processed/trimmed
+    qc_dir: qc/
 ```
 
-## 📈 Métricas de Qualidade
+## 🔗 Documentação Relacionada
+- Main Pipeline README: src/src/README.md
+- Variant Calling README: src/src/variant_calling/README.md
+- Annotation README: src/src/variant_calling/annotation/README.md
+- Filtering README: src/src/variant_calling/filtering/README.md
+- Visualization README: src/src/variant_calling/visualization/README.md
 
-### Métricas Principais
-- **Q30**: Porcentagem de bases com qualidade ≥ 30
-- **GC Content**: Distribuição de conteúdo GC
-- **Duplication Rate**: Taxa de duplicação
-- **Adapter Content**: Presença de adaptadores
-- **N Content**: Porcentagem de bases indeterminadas
-
-### Critérios de Aceitação
-- Q30 > 80%
-- Conteúdo GC entre 40-60% (dependendo da espécie)
-- Taxa de duplicação < 20%
-- Conteúdo de adaptadores < 5%
-
-## 📋 Dependências
-
-### Ferramentas Externas
-```bash
-# Instalação via conda
-conda install -c bioconda fastqc multiqc trimmomatic fastp cutadapt
-```
-
-### Bibliotecas Python
-```bash
-pip install biopython pysam pandas matplotlib seaborn plotly
-```
-
-## 🧪 Testes
-
-Todos os módulos incluem testes unitários abrangentes:
-
-```bash
-# Executar testes
-pytest tests/test_preprocessing.py -v
-
-# Testes de integração
-pytest tests/integration/test_workflow.py
-```
-
-## 📚 Documentação
-
-- Cada módulo possui documentação detalhada
-- Exemplos de uso em `examples/`
-- Tutoriais em `docs/tutorials/`
-- API reference em `docs/api/`
-
-## 🔗 Integração
-
-Este módulo se integra com:
-- `src/alignment/`: Dados pré-processados são enviados para alinhamento
-- `src/visualization/`: Relatórios de QC são visualizados
-- `config/`: Parâmetros de configuração
-- `workflows/`: Integração com sistemas de workflow
-
-## 🤝 Contribuição
-
-Para contribuir com novos módulos de pré-processamento:
-1. Siga as convenções de nomenclatura
-2. Inclua testes unitários
-3. Documente todas as funções
-4. Adicione exemplos de uso
-5. Atualize este README
+## 🖼️ Padrão Visual do Projeto
+- Cabeçalhos com emojis temáticos, listas claras, blocos de código com prompts mínimos, paleta consistente com demais READMEs.
+- Estrutura: Visão Geral → Funções → Ferramentas/Exemplos → Configuração → Integração → Boas Práticas → Métricas → Links.
 
 ## 📞 Suporte
-
-Para questões específicas sobre pré-processamento:
-- Consulte a documentação em `docs/preprocessing/`
-- Verifique issues conhecidas no repositório
-- Entre em contato com a equipe de desenvolvimento
+- Consulte docs/preprocessing/ e issues do repositório.
+- Contato: equipe de desenvolvimento do projeto.
