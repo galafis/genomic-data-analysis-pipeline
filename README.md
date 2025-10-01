@@ -1,6 +1,9 @@
 # 🇧🇷 Pipeline de Análise de Dados Genômicos
 
+![Hero Image](/assets/hero_image.png)
+
 ![Status do Projeto](https://img.shields.io/badge/Status-Ativo-brightgreen)
+
 ![Versão](https://img.shields.io/badge/Versão-1.0.0-blue)
 ![Licença](https://img.shields.io/badge/Licença-MIT-green)
 ![Linguagens](https://img.shields.io/badge/Linguagens-R%20|%20Python%20|%20Nextflow%20|%20Bash-orange)
@@ -314,7 +317,10 @@ Link do projeto: [https://github.com/galafis/genomic-data-analysis-pipeline](htt
 
 # 🇬🇧 Genomic Data Analysis Pipeline
 
+![Hero Image](/assets/hero_image.png)
+
 ![Project Status](https://img.shields.io/badge/Status-Active-brightgreen)
+
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Languages](https://img.shields.io/badge/Languages-R%20|%20Python%20|%20Nextflow%20|%20Bash-orange)
