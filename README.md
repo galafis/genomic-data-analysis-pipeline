@@ -2,11 +2,7 @@
 
 ![Hero Image](/assets/hero_image.png)
 
-![Status do Projeto](https://img.shields.io/badge/Status-Ativo-brightgreen)
 
-![Versão](https://img.shields.io/badge/Versão-1.0.0-blue)
-![Licença](https://img.shields.io/badge/Licença-MIT-green)
-![Linguagens](https://img.shields.io/badge/Linguagens-R%20|%20Python%20|%20Nextflow%20|%20Bash-orange)
 
 Um pipeline completo e modular para análise de dados genômicos, incluindo processamento de dados de sequenciamento de próxima geração (NGS), análise multi-ômica, e visualização avançada de resultados. Este projeto implementa fluxos de trabalho reproduzíveis para análise de DNA-seq, RNA-seq, single-cell, e ChIP-seq utilizando tecnologias de ponta em bioinformática.
 
@@ -319,11 +315,7 @@ Link do projeto: [https://github.com/galafis/genomic-data-analysis-pipeline](htt
 
 ![Hero Image](/assets/hero_image.png)
 
-![Project Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Languages](https://img.shields.io/badge/Languages-R%20|%20Python%20|%20Nextflow%20|%20Bash-orange)
 
 A comprehensive and modular pipeline for genomic data analysis, including next-generation sequencing (NGS) data processing, multi-omics analysis, and advanced result visualization. This project implements reproducible workflows for DNA-seq, RNA-seq, single-cell, and ChIP-seq analysis using state-of-the-art bioinformatics technologies.
 
