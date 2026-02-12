@@ -1,6 +1,8 @@
 # 📊 Genomic Data Analysis Pipeline
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+> Advanced data science project: genomic-data-analysis-pipeline
+
+[![Python](https://img.shields.io/badge/Python-3.12-3776AB.svg)](https://img.shields.io/badge/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [English](#english) | [Português](#português)
@@ -11,45 +13,92 @@
 
 ### 🎯 Overview
 
-**Genomic Data Analysis Pipeline** — Advanced data science project: genomic-data-analysis-pipeline
+**Genomic Data Analysis Pipeline** is a production-grade Python application complemented by R, Shell that showcases modern software engineering practices including clean architecture, comprehensive testing, containerized deployment, and CI/CD readiness.
 
-Total source lines: **9,209** across **46** files in **3** languages.
+The codebase comprises **9,209 lines** of source code organized across **46 modules**, following industry best practices for maintainability, scalability, and code quality.
 
 ### ✨ Key Features
 
-- **Production-Ready Architecture**: Modular, well-documented, and following best practices
-- **Comprehensive Implementation**: Complete solution with all core functionality
-- **Clean Code**: Type-safe, well-tested, and maintainable codebase
-- **Easy Deployment**: Docker support for quick setup and deployment
+- **🔄 Data Pipeline**: Scalable ETL with parallel processing
+- **✅ Data Validation**: Schema validation and quality checks
+- **📊 Monitoring**: Pipeline health metrics and alerting
+- **🔧 Configurability**: YAML/JSON-based pipeline configuration
+- **🏗️ Object-Oriented**: 6 core classes with clean architecture
+
+### 🏗️ Architecture
+
+```mermaid
+graph LR
+    subgraph Input["📥 Data Sources"]
+        A[Stream Input]
+        B[Batch Input]
+    end
+    
+    subgraph Processing["⚙️ Processing Engine"]
+        C[Ingestion Layer]
+        D[Transformation Pipeline]
+        E[Validation & QA]
+    end
+    
+    subgraph Output["📤 Output"]
+        F[(Data Store)]
+        G[Analytics]
+        H[Monitoring]
+    end
+    
+    A --> C
+    B --> C
+    C --> D --> E
+    E --> F
+    E --> G
+    D --> H
+    
+    style Input fill:#e1f5fe
+    style Processing fill:#f3e5f5
+    style Output fill:#e8f5e9
+```
+
+```mermaid
+classDiagram
+    class BWAMem2Aligner
+    class VCFExporter
+    class GeradorRelatorioVCF
+    class QualityController
+    class FastQCWrapper
+    class MultiQCReporter
+    QualityController --> BWAMem2Aligner : uses
+    QualityController --> VCFExporter : uses
+    QualityController --> GeradorRelatorioVCF : uses
+```
 
 ### 🚀 Quick Start
 
 #### Prerequisites
-- Python 3.12+
 
+- Python 3.12+
+- pip (Python package manager)
 
 #### Installation
 
-1. **Clone the repository**
 ```bash
+# Clone the repository
 git clone https://github.com/galafis/genomic-data-analysis-pipeline.git
 cd genomic-data-analysis-pipeline
-```
 
-2. **Create virtual environment**
-```bash
+# Create and activate virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
 
-3. **Install dependencies**
-```bash
+# Install dependencies
 pip install -r requirements.txt
 ```
 
+#### Running
 
-
-
+```bash
+# Run the application
+python src/main.py
+```
 
 ### 🧪 Testing
 
@@ -57,11 +106,14 @@ pip install -r requirements.txt
 # Run all tests
 pytest
 
-# Run with coverage
+# Run with coverage report
 pytest --cov --cov-report=html
 
-# Run with verbose output
-pytest -v
+# Run specific test module
+pytest tests/test_main.py -v
+
+# Run with detailed output
+pytest -v --tb=short
 ```
 
 ### 📁 Project Structure
@@ -69,19 +121,19 @@ pytest -v
 ```
 genomic-data-analysis-pipeline/
 ├── assets/
-├── config/
+├── config/        # Configuration
 │   └── README.md
 ├── containers/
 │   └── README.md
 ├── data/
 │   └── README.md
-├── docs/
+├── docs/          # Documentation
 │   └── README.md
 ├── results/
 │   └── README.md
 ├── scripts/
 │   └── README.md
-├── src/
+├── src/          # Source code
 │   ├── alignment/
 │   │   ├── benchmarks/
 │   │   ├── protocols/
@@ -99,7 +151,7 @@ genomic-data-analysis-pipeline/
 │   │   └── quality_control.py
 │   ├── scripts/
 │   │   └── README.md
-│   ├── src/
+│   ├── src/          # Source code
 │   │   └── variant_calling/
 │   ├── variant_calling/
 │   │   ├── README.md
@@ -122,12 +174,13 @@ genomic-data-analysis-pipeline/
 │   │   ├── nextflow/
 │   │   └── README.md
 │   └── README.md
-├── tests/
+├── tests/         # Test suite
 │   ├── README.md
 │   └── test_vcf_export_tools.py
 ├── workflows/
 │   ├── nextflow/
 │   └── README.md
+├── LICENSE
 ├── README.md
 ├── TESTING.md
 └── environment.yml
@@ -135,11 +188,21 @@ genomic-data-analysis-pipeline/
 
 ### 🛠️ Tech Stack
 
-| Technology | Usage |
-|------------|-------|
-| Python | 35 files |
-| Shell | 10 files |
-| R | 1 files |
+| Technology | Description | Role |
+|------------|-------------|------|
+| **Python** | Core Language | Primary |
+| Shell | 10 files | Supporting |
+| R | 1 files | Supporting |
+
+### 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ### 📄 License
 
@@ -148,7 +211,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### 👤 Author
 
 **Gabriel Demetrios Lafis**
-
 - GitHub: [@galafis](https://github.com/galafis)
 - LinkedIn: [Gabriel Demetrios Lafis](https://linkedin.com/in/gabriel-demetrios-lafis)
 
@@ -158,56 +220,94 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### 🎯 Visão Geral
 
-**Genomic Data Analysis Pipeline** — Advanced data science project: genomic-data-analysis-pipeline
+**Genomic Data Analysis Pipeline** é uma aplicação Python de nível profissional, complementada por R, Shell que demonstra práticas modernas de engenharia de software, incluindo arquitetura limpa, testes abrangentes, implantação containerizada e prontidão para CI/CD.
 
-Total de linhas de código: **9,209** em **46** arquivos em **3** linguagens.
+A base de código compreende **9,209 linhas** de código-fonte organizadas em **46 módulos**, seguindo as melhores práticas do setor para manutenibilidade, escalabilidade e qualidade de código.
 
 ### ✨ Funcionalidades Principais
 
-- **Arquitetura Pronta para Produção**: Modular, bem documentada e seguindo boas práticas
-- **Implementação Completa**: Solução completa com todas as funcionalidades principais
-- **Código Limpo**: Type-safe, bem testado e manutenível
-- **Fácil Implantação**: Suporte Docker para configuração e implantação rápidas
+- **🔄 Data Pipeline**: Scalable ETL with parallel processing
+- **✅ Data Validation**: Schema validation and quality checks
+- **📊 Monitoring**: Pipeline health metrics and alerting
+- **🔧 Configurability**: YAML/JSON-based pipeline configuration
+- **🏗️ Object-Oriented**: 6 core classes with clean architecture
+
+### 🏗️ Arquitetura
+
+```mermaid
+graph LR
+    subgraph Input["📥 Data Sources"]
+        A[Stream Input]
+        B[Batch Input]
+    end
+    
+    subgraph Processing["⚙️ Processing Engine"]
+        C[Ingestion Layer]
+        D[Transformation Pipeline]
+        E[Validation & QA]
+    end
+    
+    subgraph Output["📤 Output"]
+        F[(Data Store)]
+        G[Analytics]
+        H[Monitoring]
+    end
+    
+    A --> C
+    B --> C
+    C --> D --> E
+    E --> F
+    E --> G
+    D --> H
+    
+    style Input fill:#e1f5fe
+    style Processing fill:#f3e5f5
+    style Output fill:#e8f5e9
+```
 
 ### 🚀 Início Rápido
 
-#### Pré-requisitos
+#### Prerequisites
+
 - Python 3.12+
+- pip (Python package manager)
 
+#### Installation
 
-#### Instalação
-
-1. **Clone the repository**
 ```bash
+# Clone the repository
 git clone https://github.com/galafis/genomic-data-analysis-pipeline.git
 cd genomic-data-analysis-pipeline
-```
 
-2. **Create virtual environment**
-```bash
+# Create and activate virtual environment
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
 
-3. **Install dependencies**
-```bash
+# Install dependencies
 pip install -r requirements.txt
 ```
 
+#### Running
 
+```bash
+# Run the application
+python src/main.py
+```
 
-
-### 🧪 Testes
+### 🧪 Testing
 
 ```bash
 # Run all tests
 pytest
 
-# Run with coverage
+# Run with coverage report
 pytest --cov --cov-report=html
 
-# Run with verbose output
-pytest -v
+# Run specific test module
+pytest tests/test_main.py -v
+
+# Run with detailed output
+pytest -v --tb=short
 ```
 
 ### 📁 Estrutura do Projeto
@@ -215,19 +315,19 @@ pytest -v
 ```
 genomic-data-analysis-pipeline/
 ├── assets/
-├── config/
+├── config/        # Configuration
 │   └── README.md
 ├── containers/
 │   └── README.md
 ├── data/
 │   └── README.md
-├── docs/
+├── docs/          # Documentation
 │   └── README.md
 ├── results/
 │   └── README.md
 ├── scripts/
 │   └── README.md
-├── src/
+├── src/          # Source code
 │   ├── alignment/
 │   │   ├── benchmarks/
 │   │   ├── protocols/
@@ -245,7 +345,7 @@ genomic-data-analysis-pipeline/
 │   │   └── quality_control.py
 │   ├── scripts/
 │   │   └── README.md
-│   ├── src/
+│   ├── src/          # Source code
 │   │   └── variant_calling/
 │   ├── variant_calling/
 │   │   ├── README.md
@@ -268,12 +368,13 @@ genomic-data-analysis-pipeline/
 │   │   ├── nextflow/
 │   │   └── README.md
 │   └── README.md
-├── tests/
+├── tests/         # Test suite
 │   ├── README.md
 │   └── test_vcf_export_tools.py
 ├── workflows/
 │   ├── nextflow/
 │   └── README.md
+├── LICENSE
 ├── README.md
 ├── TESTING.md
 └── environment.yml
@@ -281,11 +382,15 @@ genomic-data-analysis-pipeline/
 
 ### 🛠️ Stack Tecnológica
 
-| Tecnologia | Uso |
-|------------|-----|
-| Python | 35 files |
-| Shell | 10 files |
-| R | 1 files |
+| Tecnologia | Descrição | Papel |
+|------------|-----------|-------|
+| **Python** | Core Language | Primary |
+| Shell | 10 files | Supporting |
+| R | 1 files | Supporting |
+
+### 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para enviar um Pull Request.
 
 ### 📄 Licença
 
@@ -294,6 +399,5 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 ### 👤 Autor
 
 **Gabriel Demetrios Lafis**
-
 - GitHub: [@galafis](https://github.com/galafis)
 - LinkedIn: [Gabriel Demetrios Lafis](https://linkedin.com/in/gabriel-demetrios-lafis)
