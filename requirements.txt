@@ -1,0 +1,10 @@
+dash
+dash-bootstrap-components
+matplotlib
+multiqc_reporter
+numpy
+pandas
+plotly
+pytest
+PyYAML
+seaborn
