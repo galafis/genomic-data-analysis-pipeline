@@ -11,6 +11,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Container-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
 [![R](https://img.shields.io/badge/R-Bioconductor-276DC3?style=for-the-badge&logo=r&logoColor=white)](https://www.bioconductor.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker)](Dockerfile)
 
 **Pipeline modular de bioinformatica para analise de dados genomicos (WGS, WES, RNA-seq, scRNA-seq, ChIP-seq) com suporte a Nextflow, Snakemake, execucao em clusters HPC (SLURM/PBS) e nuvem (AWS/GCP/Azure).**
 
