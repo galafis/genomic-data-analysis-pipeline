@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "filters": {
+    "min_qual": 30,
+    "min_dp": 10
+  },
+  "selected_ids": ["demo-1", "demo-4"],
+  "summary": {
+    "total_variants": 5,
+    "chromosomes": ["chr1", "chr2"],
+    "mean_qual": 35.0,
+    "mean_dp": 15.6,
+    "qual_range": [10.0, 60.0],
+    "dp_range": [3.0, 30.0]
+  }
+}

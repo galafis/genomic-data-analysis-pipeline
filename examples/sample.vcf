@@ -1,0 +1,8 @@
+##fileformat=VCFv4.2
+##source=synthetic-portfolio-example
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
+chr1	100	demo-1	A	G	50	PASS	DP=12
+chr1	150	demo-2	C	T	20	PASS	DP=8
+chr1	200	demo-3	G	A	.	LowQual	DP=30
+chr2	100	demo-4	T	C	60	PASS	DP=25
+chr2	300	demo-5	A	AT	10	PASS	DP=3

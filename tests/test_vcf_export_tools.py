@@ -1,3 +1,4 @@
+from numbers import Integral
 import json
 import os
 from pathlib import Path
@@ -38,11 +39,13 @@ def test_parse_vcf_loads_dataframe(exporter: VCFExporter):
     df = exporter.variants
     # basic shape and columns
     assert isinstance(df, pd.DataFrame)
-    assert set(["CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO", "DP"]).issubset(df.columns)
+    assert set(
+        ["CHROM", "POS", "ID", "REF", "ALT", "QUAL", "FILTER", "INFO", "DP"]
+    ).issubset(df.columns)
     assert len(df) == 5
     # types/parsing
     assert df.loc[0, "CHROM"] == "chr1"
-    assert isinstance(df.loc[0, "POS"], (int,))
+    assert isinstance(df.loc[0, "POS"], Integral)
     # QUAL '.' becomes None
     assert pd.isna(df.loc[2, "QUAL"]) or df.loc[2, "QUAL"] is None
     # DP parsed from INFO
@@ -59,18 +62,20 @@ def test_filter_variants_by_min_qual(exporter: VCFExporter):
 def test_filter_variants_by_min_dp(exporter: VCFExporter):
     filtered = exporter.filter_variants(min_dp=10)
     # rs5 has DP=3 should be removed
-    assert "rs5" not in set(filtered["ID"])   
-    # others remain
-    assert {"rs1", "rs2", "rs3", "rs4"}.issubset(set(filtered["ID"]))
+    assert "rs5" not in set(filtered["ID"])
+    # DP=8 (rs2) and DP=3 (rs5) are both below the threshold.
+    assert {"rs1", "rs3", "rs4"} == set(filtered["ID"])
 
 
 def test_filter_variants_by_chromosomes(exporter: VCFExporter):
-    filtered = exporter.filter_variants(chromosomes=["chr2"]) 
+    filtered = exporter.filter_variants(chromosomes=["chr2"])
     assert set(filtered["CHROM"]) == {"chr2"}
     assert set(filtered["ID"]) == {"rs4", "rs5"}
 
 
-def test_export_to_csv_creates_file_and_matches_dataframe(exporter: VCFExporter, tmp_path: Path):
+def test_export_to_csv_creates_file_and_matches_dataframe(
+    exporter: VCFExporter, tmp_path: Path
+):
     out_csv = tmp_path / "variants.csv"
     path = exporter.export_to_csv(str(out_csv), min_qual=15)
     assert path == str(out_csv)
@@ -98,7 +103,9 @@ def test_export_to_excel_creates_file_and_sheet(exporter: VCFExporter, tmp_path:
 
 def test_export_to_json_creates_file_and_content(exporter: VCFExporter, tmp_path: Path):
     out_json = tmp_path / "variants.json"
-    path = exporter.export_to_json(str(out_json), chromosomes=["chr1"], orient="records")
+    path = exporter.export_to_json(
+        str(out_json), chromosomes=["chr1"], orient="records"
+    )
     assert path == str(out_json)
     assert out_json.exists()
 
