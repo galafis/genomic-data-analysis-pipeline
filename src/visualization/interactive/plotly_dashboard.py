@@ -47,6 +47,7 @@ import argparse
 from typing import List, Dict, Any, Optional
 
 import pandas as pd
+import dash
 import plotly.express as px
 from dash import Dash, dcc, html, Input, Output, State, dash_table, callback_context
 import dash_bootstrap_components as dbc
