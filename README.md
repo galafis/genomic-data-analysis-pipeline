@@ -1,11 +1,28 @@
 # Genomic Variant Export Pipeline
 
-### Pipeline de Exportação de Variantes Genômicas
+**Research data · Dados de pesquisa**
 
-[![Validation](https://github.com/galafis/genomic-data-analysis-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/galafis/genomic-data-analysis-pipeline/actions/workflows/ci.yml)
-[English](#english) · [Português](#portugues) · [Examples / Exemplos](examples/review_demo.py) · [Validation / Validação](docs/VALIDATION.md)
+<p align="center"><img src="assets/project-overview.svg" width="960" alt="Workflow illustration: VCF input → Quality and depth → Variant exports"></p>
 
-**Bioinformatics / Bioinformática** · Working prototype / Protótipo funcional · Gabriel Demetrios Lafis
+[![Checks](https://github.com/galafis/genomic-data-analysis-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/galafis/genomic-data-analysis-pipeline/actions/workflows/ci.yml)
+[English](#english) · [Português](#portugues) · [Guided tour / Visita guiada](docs/SHOWCASE.md) · [Validation / Validação](docs/VALIDATION.md)
+
+> **EN:** Which variants meet both quality and depth criteria?<br>
+> **PT:** Quais variantes atendem aos critérios de qualidade e profundidade?
+
+## Start here · Comece aqui
+
+| Goal · Objetivo | Where to go · Por onde começar |
+| --- | --- |
+| Understand a real example · Entender um exemplo concreto | [Walkthrough / Roteiro](examples/review_demo.py) |
+| Reproduce and compare · Reproduzir e comparar | [Evidence tour / Visita às evidências](docs/SHOWCASE.md) |
+| Inspect the checks · Inspecionar as verificações | [Validation record / Registro de validação](docs/VALIDATION.md) · [CI](https://github.com/galafis/genomic-data-analysis-pipeline/actions/workflows/ci.yml) |
+
+**Example result · Resultado do exemplo:** At QUAL ≥ 30 and DP ≥ 10, demo-1 and demo-4 remain. / Com QUAL ≥ 30 e DP ≥ 10, permanecem demo-1 e demo-4.
+
+**Try a comparison · Experimente uma comparação**<br>
+**EN:** Change one quality or depth cutoff and compare selected IDs, retaining missing-value handling.<br>
+**PT:** Altere um limite de qualidade ou profundidade e compare os IDs, preservando o tratamento de ausências.
 
 <a id="english"></a>
 
